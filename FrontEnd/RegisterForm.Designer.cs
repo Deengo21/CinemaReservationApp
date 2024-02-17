@@ -1,4 +1,4 @@
-﻿namespace WinForms
+﻿namespace FrontEnd
 {
     partial class RegisterForm
     {
@@ -145,6 +145,7 @@
             MinimizeBox = false;
             Name = "RegisterForm";
             Text = "Rejestracja";
+            Load += RegisterForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

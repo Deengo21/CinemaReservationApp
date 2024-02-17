@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinForms
+namespace FrontEnd
 {
     public partial class ForgetPassForm : Form
     {
@@ -18,6 +18,11 @@ namespace WinForms
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ForgetPassForm_Load(object sender, EventArgs e)
         {
 
         }

@@ -1,4 +1,4 @@
-namespace WinForms
+namespace FrontEnd
 {
     public partial class LoginForm : Form
     {
