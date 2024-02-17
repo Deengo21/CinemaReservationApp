@@ -1,4 +1,4 @@
-﻿namespace WinForms
+﻿namespace FrontEnd
 {
     partial class ForgetPassForm
     {
@@ -100,6 +100,7 @@
             Controls.Add(fMailLabel);
             Name = "ForgetPassForm";
             Text = "Zrestartuj hasło";
+            Load += ForgetPassForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

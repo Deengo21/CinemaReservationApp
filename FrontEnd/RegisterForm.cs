@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinForms
+namespace FrontEnd
 {
     public partial class RegisterForm : Form
     {
@@ -28,6 +28,11 @@ namespace WinForms
         }
 
         private void rLoginBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RegisterForm_Load(object sender, EventArgs e)
         {
 
         }
