@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Movie = Server.Movie;
+using Movie = BackEnd.Movie;
 using Server.Data;
 
 public class Reservation

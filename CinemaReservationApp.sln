@@ -11,7 +11,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Databa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{62F74736-7A0C-476C-AF65-42F1A8A35F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{816A67EB-05D9-4106-9A6F-3CD513E21898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{816A67EB-05D9-4106-9A6F-3CD513E21898}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

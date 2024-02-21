@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Server.Data;
 
-namespace Server
+namespace BackEnd
 {
     public class Movie
     {

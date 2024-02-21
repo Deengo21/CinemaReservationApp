@@ -1,3 +1,4 @@
+
 namespace FrontEnd
 {
     internal static class Program

@@ -1,7 +1,4 @@
-﻿/**
- * Radosław Ziembiński WSB (laboratory example)
- * */
-
+﻿
 using System;
 using System.IO;
 using System.Net;
@@ -11,10 +8,11 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Example.CommunicationClasses;
 using Microsoft.VisualBasic.FileIO;
 
-namespace Example.SocketsSSLClient
+
+
+namespace Client
 {
     public class SocketClient
     {
