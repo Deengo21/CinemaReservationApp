@@ -1,4 +1,6 @@
-namespace WinForms
+using WinForms;
+
+namespace FrontEnd
 {
     internal static class Program
     {

@@ -2,7 +2,7 @@
 using Server.Data;
 using System.Text;
 
-namespace Server
+namespace BackEnd
 {
     public class Admin
     {

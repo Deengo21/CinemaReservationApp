@@ -1,6 +1,6 @@
 ﻿using Server.Data;
 
-namespace Server
+namespace BackEnd
 {
     public class Payments
     {
