@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Movie = BackEnd.Movie;
-using Server.Data;
-
+using DataEngine;
 public class Reservation
 {
     public int Id { get; set; }
@@ -10,7 +8,7 @@ public class Reservation
     public DateTime ReservationDateTime { get; set; }
 
     public virtual Customer Customer { get; set; }
-    public virtual Movie Movie { get; set; }
+    
 
     private readonly CinemaContext _dbContext;
 
@@ -57,19 +55,19 @@ public class Reservation
         await _dbContext.SaveChangesAsync();
     }
 
-    //public async Task<Reservation> GetReservationDetails(int reservationId)
-    //{
-    //    // Pobierz szczegóły rezerwacji
-    //    var reservation = await _dbContext.Reservations
-    //        .Include(r => r.Customer)
-    //        .Include(r => r.Movie)
-    //        .FirstOrDefaultAsync(r => r.ReservationId == reservationId);
+    public async Task<DataSchema.Reservation> GetReservationDetails(int reservationId)
+    {
+        // Pobierz szczegóły rezerwacji
+        var reservation = await _dbContext.Reservations
+            .Include(r => r.Customer)
+            .Include(r => r.Movie)
+            .FirstOrDefaultAsync(r => r.ReservationId == reservationId);
 
-    //    if (reservation == null)
-    //    {
-    //        throw new Exception("Rezerwacja o podanym identyfikatorze nie istnieje.");
-    //    }
+        if (reservation == null)
+        {
+            throw new Exception("Rezerwacja o podanym identyfikatorze nie istnieje.");
+        }
 
-    //    //return reservation;
-    //}
+        return reservation;
+    }
 }

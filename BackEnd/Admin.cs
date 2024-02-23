@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Server.Data;
+using Server;
 using System.Text;
+using DataEngine;
+using System.Threading.Tasks;
 
 namespace BackEnd
 {
-    public class Admin
+    public class Admin 
     {
         private readonly CinemaContext _dbContext;
 
@@ -16,7 +18,7 @@ namespace BackEnd
         public async Task Login(string email, string password)
         {
             var x = new Customer(_dbContext);
-            var admin = await _dbContext.Users.FirstOrDefaultAsync(a => a.Email == email);
+            var admin = await _dbContext.Customers.FirstOrDefaultAsync(a => a.Email == email);
 
             if (admin == null || !x.VerifyPassword(password, admin.PasswordHash))
             {
@@ -28,7 +30,7 @@ namespace BackEnd
         public async Task ManageAccounts()
         {
             // Wyświetl listę wszystkich użytkowników do zarządzania
-            var users = await _dbContext.Users.ToListAsync();
+            var users = await _dbContext.Customers.ToListAsync();
 
 
             foreach (var user in users)

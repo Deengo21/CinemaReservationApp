@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.sqlproj" />
+    <ProjectReference Include="..\DataEngine\DataEngine.csproj" />
     <ProjectReference Include="..\FrontEnd\FrontEnd.csproj" />
     <ProjectReference Include="..\Server\Server.csproj" />
   </ItemGroup>

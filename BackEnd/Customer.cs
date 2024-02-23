@@ -5,8 +5,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Server.Data;
-using Movie = Server.Data.Movie;
+using DataEngine;
+using static DataEngine.DataSchema;
+using System.Linq;
 
 public class Customer
 {
@@ -27,10 +28,10 @@ public class Customer
     public async Task Register(string name, string email, string password)
     {
         // Sprawdź, czy istnieje już konto z podanym adresem e-mail
-        //if (await _dbContext.Customers.AnyAsync(c => c.Email == email))
-        //{
-        //    throw new Exception("Konto o podanym adresie e-mail już istnieje.");
-        //}
+        if (await _dbContext.Customers.AnyAsync(c => c.Email == email))
+        {
+            throw new Exception("Konto o podanym adresie e-mail już istnieje.");
+        }
 
         // Generuj unikalny token weryfikacyjny
         var verificationToken = Guid.NewGuid().ToString();
@@ -89,22 +90,22 @@ public class Customer
 
     public async Task Login(string email, string password)
     {
-        // Znajdź użytkownika o podanym adresie e-mail
-        //var customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.Email == email);
+        //Znajdź użytkownika o podanym adresie e-mail
+        var customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.Email == email);
 
-        // Sprawdź, czy użytkownik istnieje i czy hasło jest poprawne
-        //if (customer == null || !VerifyPassword(password, customer.PasswordHash))
-        //{
-        //    throw new Exception("Nieprawidłowy adres e-mail lub hasło.");
-        //}
+       // Sprawdź, czy użytkownik istnieje i czy hasło jest poprawne
+        if (customer == null || !VerifyPassword(password, customer.PasswordHash))
+        {
+            throw new Exception("Nieprawidłowy adres e-mail lub hasło.");
+        }
 
-        // Sprawdź, czy konto zostało zweryfikowane
-        //if (!customer.IsVerified)
-        //{
-        //    throw new Exception("Konto nie zostało jeszcze zweryfikowane. Sprawdź e-mail w celu potwierdzenia rejestracji.");
-        //}
+        //Sprawdź, czy konto zostało zweryfikowane
+        if (!customer.IsVerified)
+        {
+            throw new Exception("Konto nie zostało jeszcze zweryfikowane. Sprawdź e-mail w celu potwierdzenia rejestracji.");
+        }
 
-       
+
     }
    
 
@@ -132,26 +133,33 @@ public class Customer
         //_dbContext.Reservations.Add(reservation);
         await _dbContext.SaveChangesAsync();
     }
-    public async Task<List<Movie>> BrowseMovies(List<Movie> availableMovies)
+
+    public CinemaContext Get_dbContext()
     {
-        // Pobierz listę dostępnych filmów z bazy danych
-        //availableMovies = await _dbContext.Movies
-        //   .Where(m => m.IsAvailable)
-        //   .ToList();
+        return _dbContext;
+    }
+
+    public async Task<List<Movie>> BrowseMovies(List<Movie> availableMovies, CinemaContext _dbContext)
+    {
+        //Pobierz listę dostępnych filmów z bazy danych
+       availableMovies = _dbContext.Movies
+          .Where(m => m.IsAvailable)
+          .ToList();
 
         return availableMovies;
     }
 
-    //public async Task<List<Reservation>> ViewHistory()
-    //{
-    //    // Pobierz historię rezerwacji bieżącego użytkownika
-    //    var reservations = await _dbContext.Reservations
-    //        .Where(r => r.UserId == this.Id) 
-    //        .Include(r => r.Movie) 
-    //        .ToListAsync();
-
-    //    //return reservations;
-    //}
+    public async Task<List<DataSchema.Reservation>> ViewHistory()
+    {
+        // Pobierz historię rezerwacji bieżącego użytkownika
+        
+       var reservations = await _dbContext.Reservations
+            .Where(r => r.UserId == this.Id)
+            .Include(r => r.Movie)
+            .ToListAsync();
+        return reservations;
+  
+    }
 
 
     public bool VerifyPassword(string enteredPassword, string storedHash)

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Server.Data;
+using DataEngine;
 
 namespace BackEnd
 {
@@ -28,7 +28,7 @@ namespace BackEnd
                 Id = room.RoomId;
                 RoomNumber = room.RoomNumber;
                 TotalSeats = room.TotalSeats;
-                Screenings = room.Screenings;
+                //Screenings = room.Screenings;
             }
         }
 

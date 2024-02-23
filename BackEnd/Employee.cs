@@ -1,4 +1,4 @@
-﻿using Server.Data;
+﻿using DataEngine;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,6 @@ namespace BackEnd
     public class Employee
     {
         private readonly CinemaContext _dbContext;
-
         public Employee(CinemaContext dbContext)
         {
             _dbContext = dbContext;
@@ -17,12 +16,12 @@ namespace BackEnd
         public async Task Login(string email, string password)
         {
 
-            //var employee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Email == email);
+            var employee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Email == email);
 
-            //if (employee == null || !VerifyPassword(password, employee.PasswordHash))
-            //{
-            //    throw new Exception("Nieprawidłowy adres e-mail lub hasło.");
-            //}
+            if (employee == null || !VerifyPassword(password, employee.PasswordHash))
+            {
+                throw new Exception("Nieprawidłowy adres e-mail lub hasło.");
+            }
         }
 
         public async Task ManageReservations()
