@@ -41,7 +41,7 @@ namespace BackEnd
                 .ToListAsync();
 
             // Oblicz dostępne miejsca
-            int reservedSeatsCount = reservations.Sum(r => (int)r.SeatNumber);
+            int reservedSeatsCount = /*reservations.Sum(r => (int)r.SeatNumber)*/ 0;
             int availableSeats = TotalSeats - reservedSeatsCount;
 
             // Aktualizuj dostępne miejsca w obiekcie Room

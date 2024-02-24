@@ -41,15 +41,15 @@ namespace BackEnd
         public async Task<ReservedSeatsDTO> UpdateReservedSeats()
         {
             // Pobierz informacje o zarezerwowanych miejscach dla danego seansu
-            var reservedSeatsInfo = await _dbContext.Reservations
-                .Where(r => r.ScreeningId == Id)
-                .GroupBy(r => r.SeatNumber)
-                .Select(g => new ReservedSeatsDTO
-                {
-                    SeatNumber = (int)g.Key,
-                    ReservedCount = g.Count()
-                })
-                .ToListAsync();
+            //var reservedSeatsInfo = await _dbContext.Reservations
+            //    .Where(r => r.ScreeningId == Id)
+            //    .GroupBy(r => r.SeatNumber)
+            //    .Select(g => new ReservedSeatsDTO
+            //    {
+            //        SeatNumber = (int)g.Key,
+            //        ReservedCount = g.Count()
+            //    })
+            //    .ToListAsync();
 
             // Znajdź całkowitą liczbę miejsc w sali
             var totalSeats = await _dbContext.Rooms
@@ -58,16 +58,17 @@ namespace BackEnd
                 .FirstOrDefaultAsync();
 
             // Oblicz liczbę wolnych miejsc
-            var availableSeats = totalSeats - reservedSeatsInfo.Sum(r => r.ReservedCount);
+            var availableSeats = totalSeats - /*reservedSeatsInfo.Sum(r => r.ReservedCount)*/ 0;
 
             // Utwórz DTO z informacjami o zarezerwowanych i dostępnych miejscach
-            var result = new ReservedSeatsDTO
-            {
-                ReservedSeatsInfo = reservedSeatsInfo,
-                AvailableSeats = availableSeats
-            };
+            //var result = new ReservedSeatsDTO
+            //{
+            //    ReservedSeatsInfo = reservedSeatsInfo,
+            //    AvailableSeats = availableSeats
+            //};
 
-            return result;
+            //return result;
+            return null;
         }
     }
 
