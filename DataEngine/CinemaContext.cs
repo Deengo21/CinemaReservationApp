@@ -1,6 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace DataEngine
@@ -23,10 +31,8 @@ namespace DataEngine
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
-            }
+            DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

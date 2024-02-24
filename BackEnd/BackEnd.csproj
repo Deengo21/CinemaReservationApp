@@ -2,16 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\Database.sqlproj" />
     <ProjectReference Include="..\DataEngine\DataEngine.csproj" />
-    <ProjectReference Include="..\FrontEnd\FrontEnd.csproj" />
-    <ProjectReference Include="..\Server\Server.csproj" />
   </ItemGroup>
 
 </Project>

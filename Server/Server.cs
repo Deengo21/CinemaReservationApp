@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Net;
@@ -8,6 +9,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using DataEngine;
 
 namespace Server
 {
@@ -20,7 +23,6 @@ namespace Server
         string host;
         X509Certificate2 serverCertificate = null;
 
-
         public SocketServer(string _host, int _socketNo)
         {
             socketNo = _socketNo;
@@ -28,6 +30,14 @@ namespace Server
             string certFile = "C:\\Users\\WSB\\source\\repos\\ExampleSocketSSL\\certificate\\localhost.pfx";
             string password = "mytopsecretpasswd";
             serverCertificate = new X509Certificate2(certFile, password, X509KeyStorageFlags.MachineKeySet);
+
+            // connect to database
+            DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True");
+
+            //populate
+            DataSchema.Movie x = new DataSchema.Movie();
+
         }
 
         public void Initialize()
