@@ -1,10 +1,15 @@
-﻿using Server.Data;
+﻿using DataEngine;
 
 namespace BackEnd
 {
     public class Payments
     {
         private readonly CinemaContext _dbContext;
+
+        public int PaymentId { get; private set; }
+        public decimal Cost { get; private set; }
+        public DateTime PaymentDate { get; private set; }
+        public bool IsConfirmed { get; private set; }
 
         public Payments(CinemaContext dbContext)
         {
@@ -15,7 +20,7 @@ namespace BackEnd
         public async Task<bool> MakePayment(int customerId, decimal amount)
         {
 
-            var payment = new Payment
+            var payment = new Payments(_dbContext)
             {
                 PaymentId = customerId,
                 Cost = amount,
