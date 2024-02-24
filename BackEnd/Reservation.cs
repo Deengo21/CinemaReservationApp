@@ -55,19 +55,19 @@ public class Reservation
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<DataSchema.Reservation> GetReservationDetails(int reservationId)
-    {
-        // Pobierz szczegóły rezerwacji
-        var reservation = await _dbContext.Reservations
-            .Include(r => r.Customer)
-            .Include(r => r.Movie)
-            .FirstOrDefaultAsync(r => r.ReservationId == reservationId);
+    //public async Task<DataSchema.Reservation> GetReservationDetails(int reservationId)
+    //{
+    //    // Pobierz szczegóły rezerwacji
+    //    var reservation = await _dbContext.Reservations
+    //        .Include(r => r.Customer)
+    //        .Include(r => r.Movie)
+    //        .FirstOrDefaultAsync(r => r.ReservationId == reservationId);
 
-        if (reservation == null)
-        {
-            throw new Exception("Rezerwacja o podanym identyfikatorze nie istnieje.");
-        }
+    //    if (reservation == null)
+    //    {
+    //        throw new Exception("Rezerwacja o podanym identyfikatorze nie istnieje.");
+    //    }
 
-        return reservation;
-    }
+    //    return reservation;
+    //}
 }

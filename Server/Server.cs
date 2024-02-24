@@ -22,22 +22,37 @@ namespace Server
         Task mainLoopTask;
         string host;
         X509Certificate2 serverCertificate = null;
+        CinemaContext cinemaContext;
 
         public SocketServer(string _host, int _socketNo)
         {
             socketNo = _socketNo;
             host = _host;
-            string certFile = "C:\\Users\\WSB\\source\\repos\\ExampleSocketSSL\\certificate\\localhost.pfx";
-            string password = "mytopsecretpasswd";
+            string certFile = "C:\\Windows\\System32\\localhost.pfx";
+            string password = "s3cr3tp4ssword";
             serverCertificate = new X509Certificate2(certFile, password, X509KeyStorageFlags.MachineKeySet);
-
+            
             // connect to database
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True");
+            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            cinemaContext = new CinemaContext(builder.Options);
+            cinemaContext.Database.EnsureDeleted();
+            //cinemaContext.Database.EnsureCreated();
 
             //populate
-            DataSchema.Movie x = new DataSchema.Movie();
+            DataSchema.Movie x = new DataSchema.Movie()
+            {
+                MovieId = 1,
+                Title = "Terminator",
+                Director = "RandomGuy",
+                Length = 120,
+                FilmGenre = "Thriller",
+            };
+            cinemaContext.Add(x);
+            cinemaContext.SaveChanges();
 
+            return;
         }
 
         public void Initialize()

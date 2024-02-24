@@ -40,13 +40,13 @@ public class Customer
         string passwordHash = HashPassword(password);
 
         // Zapisz dane do bazy danych
-        var newCustomer = new Customer(_dbContext);
-        {
-            Name = name;
-            Email = email;
-            PasswordHash = passwordHash;
-            IsVerified = false;
-        };
+        //var newCustomer = new Customer(_dbContext);
+        //{
+        //    Name = name;
+        //    Email = email;
+        //    PasswordHash = passwordHash;
+        //    IsVerified = false;
+        //};
 
         //_dbContext.Customers.Add(newCustomer);
         await _dbContext.SaveChangesAsync();
@@ -125,7 +125,7 @@ public class Customer
         var reservation = new Reservation(_dbContext)
         {
             MovieId = selectedMovie.MovieId,
-            CustomerId = this.Id, 
+            //CustomerId = this.Id, TODO: customerId is an object here, it should not be.
             ReservationDateTime = dateTime
             
         };
@@ -149,17 +149,17 @@ public class Customer
         return availableMovies;
     }
 
-    public async Task<List<DataSchema.Reservation>> ViewHistory()
-    {
-        // Pobierz historię rezerwacji bieżącego użytkownika
+    //public async Task<List<DataSchema.Reservation>> ViewHistory()
+    //{
+    //    // Pobierz historię rezerwacji bieżącego użytkownika
         
-       var reservations = await _dbContext.Reservations
-            .Where(r => r.UserId == this.Id)
-            .Include(r => r.Movie)
-            .ToListAsync();
-        return reservations;
+    //   var reservations = await _dbContext.Reservations
+    //        .Where(r => r.UserId == Id)
+    //        .Include(r => r.Movie)
+    //        .ToListAsync();
+    //    return reservations;
   
-    }
+    //}
 
 
     public bool VerifyPassword(string enteredPassword, string storedHash)

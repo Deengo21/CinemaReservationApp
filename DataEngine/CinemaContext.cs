@@ -15,6 +15,11 @@ namespace DataEngine
 {
     public class CinemaContext : DbContext
     {
+        static void Main(string[] args)
+        {
+
+        }
+
         public DbSet<DataSchema.Movie> Movies { get; set; }
         public DbSet<DataSchema.Screening> Screenings { get; set; }
         public DbSet<DataSchema.Reservation> Reservations { get; set; }
@@ -29,10 +34,14 @@ namespace DataEngine
             _configuration = configuration;
         }
 
+        public CinemaContext(DbContextOptions options) : base(options)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True");
+            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -101,7 +110,7 @@ namespace DataEngine
                 .WithMany(ro => ro.Reservations)
                 .HasForeignKey(r => r.RoomId);
 
-            // Konfiguracja tabeli Users
+            //Konfiguracja tabeli Users
             modelBuilder.Entity<DataSchema.Customer>()
                 .HasKey(u => u.UserId);
 
@@ -144,4 +153,5 @@ namespace DataEngine
                 .HasMaxLength(20);
         }
     }
+   
 }
