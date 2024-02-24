@@ -11,47 +11,47 @@ namespace FrontEnd
 {
     public partial class MainForm : Form
     {
-        public List<Movie> Movies { get; set; }
+        //public List<Movie> Movies { get; set; }
         public MainForm()
         {
-            Movies = GetMovies();
+            //Movies = GetMovies();
             InitializeComponent();
             InitializeDataGridView();
         }
 
-        private List<Movie> GetMovies()
-        {
-            var list = new List<Movie>();
-            list.Add(new Movie()
-            {
-                MovieID = 1,
-                Title = "Title1",
-                RoomID = 1,
-                Date = new DateTime(2024, 6, 10, 15, 00, 00)
+        //private List<Movie> GetMovies()
+        //{
+        //    var list = new List<Movie>();
+        //    list.Add(new Movie()
+        //    {
+        //        MovieID = 1,
+        //        Title = "Title1",
+        //        RoomID = 1,
+        //        Date = new DateTime(2024, 6, 10, 15, 00, 00)
 
-            });
-            list.Add(new Movie()
-            {
-                MovieID = 2,
-                Title = "Title2",
-                RoomID = 2,
-                Date = new DateTime(2024, 6, 10, 15, 00, 00)
+        //    });
+        //    list.Add(new Movie()
+        //    {
+        //        MovieID = 2,
+        //        Title = "Title2",
+        //        RoomID = 2,
+        //        Date = new DateTime(2024, 6, 10, 15, 00, 00)
 
-            });
-            list.Add(new Movie()
-            {
-                MovieID = 3,
-                Title = "Title3",
-                RoomID = 3,
-                Date = new DateTime(2024, 6, 10, 15, 00, 00)
+        //    });
+        //    list.Add(new Movie()
+        //    {
+        //        MovieID = 3,
+        //        Title = "Title3",
+        //        RoomID = 3,
+        //        Date = new DateTime(2024, 6, 10, 15, 00, 00)
 
-            });
-            return list;
-        }
+        //    });
+        //    return list;
+        //}
         private void InitializeDataGridView()
         {
             dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.DataSource = Movies;
+            //dataGridView1.DataSource = Movies;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
 
@@ -79,11 +79,11 @@ namespace FrontEnd
         {
             try
             {
-                var selectedMovie = dataGridView1.SelectedRows[0].DataBoundItem as Movie;
-                textBoxMovieID.Text = selectedMovie.MovieID.ToString();
-                textBoxTitle.Text = selectedMovie.Title;
-                textBoxRoomID.Text = selectedMovie.RoomID.ToString();
-                textBoxDate.Text = selectedMovie.Date.ToString();
+                //var selectedMovie = dataGridView1.SelectedRows[0].DataBoundItem as Movie;
+                //textBoxMovieID.Text = selectedMovie.MovieID.ToString();
+                //textBoxTitle.Text = selectedMovie.Title;
+                //textBoxRoomID.Text = selectedMovie.RoomID.ToString();
+                //textBoxDate.Text = selectedMovie.Date.ToString();
             }
             catch (Exception ex)
             {

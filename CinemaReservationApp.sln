@@ -7,16 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "BackEnd\BackEnd.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{9523984C-4ADE-4EB5-B5CA-7EB9EBC6FE24}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{D0213938-592B-422C-B2B8-F314C42D6168}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{62F74736-7A0C-476C-AF65-42F1A8A35F7A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{816A67EB-05D9-4106-9A6F-3CD513E21898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEngine", "DataEngine\DataEngine.csproj", "{62A1EBDE-A3F7-499D-AA4D-4DD38E4AE162}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D0213938-592B-422C-B2B8-F314C42D6168} = {D0213938-592B-422C-B2B8-F314C42D6168}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataEngine", "DataEngine\DataEngine.csproj", "{62A1EBDE-A3F7-499D-AA4D-4DD38E4AE162}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,12 +27,6 @@ Global
 		{9523984C-4ADE-4EB5-B5CA-7EB9EBC6FE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9523984C-4ADE-4EB5-B5CA-7EB9EBC6FE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9523984C-4ADE-4EB5-B5CA-7EB9EBC6FE24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0213938-592B-422C-B2B8-F314C42D6168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0213938-592B-422C-B2B8-F314C42D6168}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0213938-592B-422C-B2B8-F314C42D6168}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{D0213938-592B-422C-B2B8-F314C42D6168}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0213938-592B-422C-B2B8-F314C42D6168}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0213938-592B-422C-B2B8-F314C42D6168}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{62F74736-7A0C-476C-AF65-42F1A8A35F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62F74736-7A0C-476C-AF65-42F1A8A35F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62F74736-7A0C-476C-AF65-42F1A8A35F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU

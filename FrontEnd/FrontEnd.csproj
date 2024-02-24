@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\Database.sqlproj" />
     <ProjectReference Include="..\Server\Server.csproj" />
   </ItemGroup>
 

@@ -6,37 +6,41 @@ namespace BackEnd
     {
         private readonly CinemaContext _dbContext;
 
-        public int PaymentId { get; private set; }
-        public decimal Cost { get; private set; }
-        public DateTime PaymentDate { get; private set; }
-        public bool IsConfirmed { get; private set; }
+        public int PaymentId { get; set; }
+        public decimal Cost { get; set; }
+        public string PaymentMethod { get; set; }
+
+        public DateTime PaymentDate { get; set; }
+
+        public bool IsConfirmed { get; set; }
+        public List<Reservation> Reservations { get; set; }
 
         public Payments(CinemaContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        // Metoda dokonywania płatności
-        public async Task<bool> MakePayment(int customerId, decimal amount)
-        {
+        //// Metoda dokonywania płatności
+        //public async Task<bool> MakePayment(int customerId, decimal amount)
+        //{
 
-            var payment = new Payments(_dbContext)
-            {
-                PaymentId = customerId,
-                Cost = amount,
-                PaymentDate = DateTime.Now,
-                IsConfirmed = false // Początkowo płatność nie jest potwierdzona
-            };
+        //    var payment = new Payments(_dbContext)
+        //    {
+        //        PaymentId = customerId,
+        //        Cost = amount,
+        //        PaymentDate = DateTime.Now,
+        //        IsConfirmed = false // Początkowo płatność nie jest potwierdzona
+        //    };
 
-            _dbContext.Payments.Add(payment);
-            await _dbContext.SaveChangesAsync();
+        //    _dbContext.Payments.Add(payment);
+        //    await _dbContext.SaveChangesAsync();
 
-            // Po udanej płatności ustaw flagę IsConfirmed na true
-            payment.IsConfirmed = true;
-            await _dbContext.SaveChangesAsync();
+        //    // Po udanej płatności ustaw flagę IsConfirmed na true
+        //    payment.IsConfirmed = true;
+        //    await _dbContext.SaveChangesAsync();
 
-            return true; // Zakładamy, że płatność zakończyła się pomyślnie
-        }
+        //    return true; // Zakładamy, że płatność zakończyła się pomyślnie
+        //}
 
         // Metoda potwierdzania płatności
         public async Task<bool> ConfirmPayment(int paymentId)
