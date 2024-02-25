@@ -28,28 +28,60 @@ namespace Server
         {
             socketNo = _socketNo;
             host = _host;
-            string certFile = "C:\\Windows\\System32\\localhost.pfx";
-            string password = "s3cr3tp4ssword";
+            string certFile = "C:\\Windows\\System32\\certificate.pfx";
+            string password = "a";
             serverCertificate = new X509Certificate2(certFile, password, X509KeyStorageFlags.MachineKeySet);
             
             // connect to database
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
+            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=C:\\USERS\\KAROL\\DESKTOP\\CINEMARESERVATIONAPP\\CINEMARESERVATIONAPP\\DATAENGINE\\BD123.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+           
             cinemaContext = new CinemaContext(builder.Options);
-            cinemaContext.Database.EnsureDeleted();
-            //cinemaContext.Database.EnsureCreated();
+            //cinemaContext.Database.EnsureDeleted();
+            cinemaContext.Database.EnsureCreated();
 
             //populate
             DataSchema.Movie x = new DataSchema.Movie()
             {
-                MovieId = 1,
+               
                 Title = "Terminator",
                 Director = "RandomGuy",
                 Length = 120,
                 FilmGenre = "Thriller",
+                IsAvailable = true
+            };
+            DataSchema.Movie zz = new DataSchema.Movie()
+            {
+
+                Title = "Terminator",
+                Director = "RandomGuy",
+                Length = 120,
+                FilmGenre = "Thriller",
+                IsAvailable = true
+            };
+            DataSchema.Movie zzs = new DataSchema.Movie()
+            {
+
+                Title = "Terminator",
+                Director = "RandomGuy",
+                Length = 120,
+                FilmGenre = "Thriller",
+                IsAvailable = true
+            };
+            DataSchema.Customer y = new DataSchema.Customer()
+            {
+                Username = "a",
+                Email = "a",
+                Password = "a",
+                PasswordHash = "a",
+                IsVerified = true,
+
+
             };
             cinemaContext.Add(x);
+            cinemaContext.Add(y);
+            cinemaContext.Add(zz);
+            cinemaContext.Add(zzs);
             cinemaContext.SaveChanges();
 
             return;

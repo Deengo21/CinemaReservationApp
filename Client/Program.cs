@@ -59,71 +59,73 @@ namespace Client
 
                 StreamReader sr = new StreamReader(new BufferedStream(sslStream), Encoding.UTF8);
                 StreamWriter sw = new StreamWriter(sslStream, Encoding.UTF8);
-
-
-                //try
-                //{
-                //    Option message = new Option();
-                //    OptionView.ClientSetGrettings(ref message);
-                //    do
-                //    {
-                //        if (message.code.CompareTo("greetings") == 0)
-                //        {
-                //            sw.WriteLine(message.Serialize());
-                //            sw.Flush();
-                //            message.Deserialize(sr.ReadLine());
-                //            OptionView.ClientDisplayAcknowledgment(message);
-                //        }
-                //        else if (message.code.CompareTo("login") == 0)
-                //        {
-                //            Login login = new Login();
-                //            LoginView.ClientGetUserName(ref login);
-                //            sw.WriteLine(login.Serialize());
-                //            sw.Flush();
-                //            login.Deserialize(sr.ReadLine());
-                //            LoginView.ClientDisplayLogin(login);
-                //            message = login;
-                //        }
-                //        else if (message.code.CompareTo("password") == 0)
-                //        {
-                //            Password password = new Password();
-                //            PasswordView.ClientGetPassword(ref password);
-                //            sw.WriteLine(password.Serialize());
-                //            sw.Flush();
-                //            password.Deserialize(sr.ReadLine());
-                //            PasswordView.ClientDisplayPassword(password);
-                //            message = password;
-                //        }
-                //        else if (message.code.CompareTo("menu") == 0)
-                //        {
-                //            Menu menu = new Menu();
-                //            MenuView.ClientDisplayMenu(menu);
-                //            MenuView.ClientGetMenuEntry(ref menu);
-                //            sw.WriteLine(menu.Serialize());
-                //            sw.Flush();
-                //            menu.Deserialize(sr.ReadLine());
-                //            OptionView.ClientDisplayAcknowledgment(message);
-                //            message = menu;
-                //        }
-                //        else
-                //        {
-                //            OptionView.ClientDisplayAcknowledgment(message);
-                //            break;
-                //        }
-                //    } while (message.error.CompareTo("ok") == 0);
-                //}
-                //catch (Exception e)
-                //{
-                //    Console.WriteLine(e.ToString());
-                //}
-                sslStream.Close();
-                nstr.Close();
             }
+
+
+            //    try
+            //    {
+            //        Option message = new Option();
+            //        OptionView.ClientSetGrettings(ref message);
+            //        do
+            //        {
+            //            if (message.code.CompareTo("greetings") == 0)
+            //            {
+            //                sw.WriteLine(message.Serialize());
+            //                sw.Flush();
+            //                message.Deserialize(sr.ReadLine());
+            //                OptionView.ClientDisplayAcknowledgment(message);
+            //            }
+            //            else if (message.code.CompareTo("login") == 0)
+            //            {
+            //                Login login = new Login();
+            //                LoginView.ClientGetUserName(ref login);
+            //                sw.WriteLine(login.Serialize());
+            //                sw.Flush();
+            //                login.Deserialize(sr.ReadLine());
+            //                LoginView.ClientDisplayLogin(login);
+            //                message = login;
+            //            }
+            //            else if (message.code.CompareTo("password") == 0)
+            //            {
+            //                Password password = new Password();
+            //                PasswordView.ClientGetPassword(ref password);
+            //                sw.WriteLine(password.Serialize());
+            //                sw.Flush();
+            //                password.Deserialize(sr.ReadLine());
+            //                PasswordView.ClientDisplayPassword(password);
+            //                message = password;
+            //            }
+            //            else if (message.code.CompareTo("menu") == 0)
+            //            {
+            //                Menu menu = new Menu();
+            //                MenuView.ClientDisplayMenu(menu);
+            //                MenuView.ClientGetMenuEntry(ref menu);
+            //                sw.WriteLine(menu.Serialize());
+            //                sw.Flush();
+            //                menu.Deserialize(sr.ReadLine());
+            //                OptionView.ClientDisplayAcknowledgment(message);
+            //                message = menu;
+            //            }
+            //            else
+            //            {
+            //                OptionView.ClientDisplayAcknowledgment(message);
+            //                break;
+            //            }
+            //        } while (message.error.CompareTo("ok") == 0);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine(e.ToString());
+            //    }
+            //    sslStream.Close();
+            //    nstr.Close();
+            //}
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
                 return false;
             }
+
             client.Close();
             return true;
         }

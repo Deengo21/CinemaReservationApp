@@ -20,27 +20,27 @@ namespace BackEnd
             _dbContext = dbContext;
         }
 
-        //// Metoda dokonywania płatności
-        //public async Task<bool> MakePayment(int customerId, decimal amount)
-        //{
+        // Metoda dokonywania płatności
+        public async Task<bool> MakePayment(int customerId, decimal amount)
+        {
 
-        //    var payment = new Payments(_dbContext)
-        //    {
-        //        PaymentId = customerId,
-        //        Cost = amount,
-        //        PaymentDate = DateTime.Now,
-        //        IsConfirmed = false // Początkowo płatność nie jest potwierdzona
-        //    };
+            var payment = new DataSchema.Payment()
+            {
+                PaymentId = customerId,
+                Cost = amount,
+                PaymentDate = DateTime.Now,
+                IsConfirmed = false // Początkowo płatność nie jest potwierdzona
+            };
 
-        //    _dbContext.Payments.Add(payment);
-        //    await _dbContext.SaveChangesAsync();
+            _dbContext.Payments.Add(payment);
+            await _dbContext.SaveChangesAsync();
 
-        //    // Po udanej płatności ustaw flagę IsConfirmed na true
-        //    payment.IsConfirmed = true;
-        //    await _dbContext.SaveChangesAsync();
+            // Po udanej płatności ustaw flagę IsConfirmed na true
+            payment.IsConfirmed = true;
+            await _dbContext.SaveChangesAsync();
 
-        //    return true; // Zakładamy, że płatność zakończyła się pomyślnie
-        //}
+            return true; // Zakładamy, że płatność zakończyła się pomyślnie
+        }
 
         // Metoda potwierdzania płatności
         public async Task<bool> ConfirmPayment(int paymentId)

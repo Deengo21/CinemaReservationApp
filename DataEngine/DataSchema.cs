@@ -19,8 +19,8 @@ namespace DataEngine
             public List<Reservation> Reservations { get; set; }
 
             public List<Screening> Screenings { get; set; }
-            public bool IsAvailable { get; internal set; }
-            //public object Id { get; internal set; }
+            public bool IsAvailable { get; set; }
+            
         }
 
         public class Screening
@@ -33,8 +33,7 @@ namespace DataEngine
             public Movie Movie { get; set; }
 
             public List<Reservation> Reservations { get; set; }
-            //public object Id { get; internal set; }
-            //public object DateTime { get; internal set; }
+           
             public int RoomId { get; internal set; }
             public int Duration { get; internal set; }
             public int RoomNumber { get; internal set; }
@@ -52,6 +51,7 @@ namespace DataEngine
 
             public int UserId { get; set; }
             
+            public int Seat { get; set; }
           
             public Customer User { get; set; }
 
@@ -60,11 +60,9 @@ namespace DataEngine
 
             public int PaymentId { get; set; }
             public Payment Payment { get; set; }
-            //public object Seat { get; internal set; }
-            //public object Customer { get; internal set; }
-            //public object SeatNumber { get; internal set; }
-            public bool IsAvailable { get; internal set; }
-            //public object ReservationDateTime { get; internal set; }
+     
+            public bool IsAvailable { get;  set; }
+            
         }
 
         public class Customer
@@ -77,8 +75,6 @@ namespace DataEngine
             public List<Reservation> Reservations { get; set; }
             public string Email { get; set; }
             public string PasswordHash { get; set; }
-            //public object Id { get; internal set; }
-            //public object Name { get; internal set; }
             public bool IsVerified { get; set; }
         }
 
