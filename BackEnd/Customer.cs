@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DataEngine;
 using static DataEngine.DataSchema;
 using System.Linq;
+using Npgsql.Logging;
 
 public class Customer
 {
@@ -37,67 +38,43 @@ public class Customer
         var verificationToken = Guid.NewGuid().ToString();
 
         // Zabezpiecz hasło przed zapisaniem do bazy danych
-        string passwordHash = HashPassword(password);
+        //string passwordHash = HashPassword(password);
 
         // Zapisz dane do bazy danych
-        //var newCustomer = new Customer(_dbContext);
-        //{
-        //    Name = name;
-        //    Email = email;
-        //    PasswordHash = passwordHash;
-        //    IsVerified = false;
-        //};
+        var newCustomer = new DataSchema.Customer();
+        {
+            Name = name;
+            Email = email;
+            PasswordHash = "a";
+            IsVerified = false;
+        };
 
-        //_dbContext.Customers.Add(newCustomer);
+        _dbContext.Customers.Add(newCustomer);
         await _dbContext.SaveChangesAsync();
 
-        // Wyślij e-mail weryfikacyjny
-        await SendVerificationEmail(email, verificationToken);
+       
     }
 
-    private string HashPassword(string password)
-    {
-        using (SHA256 sha256 = SHA256.Create())
-        {
-            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-        }
-    }
+    //private string HashPassword(string password)
+    //{
+    //    using (SHA256 sha256 = SHA256.Create())
+    //    {
+    //        byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+    //        return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+    //    }
+    //}
 
-    private async Task SendVerificationEmail(string email, string verificationToken)
-    {
-        var smtpClient = new SmtpClient("your-smtp-server.com")
-        {
-            UseDefaultCredentials = false,
-            Credentials = new NetworkCredential("your-email@example.com", "your-email-password"),
-            Port = 587,
-            EnableSsl = true,
-        };
-
-        var mailMessage = new MailMessage
-        {
-            From = new MailAddress("your-email@example.com"),
-            Subject = "Potwierdzenie rejestracji",
-            Body = $"Aby potwierdzić rejestrację, kliknij poniższy link:\n\n" +
-                   $"https://your-app-url.com/verify?email={email}&token={verificationToken}",
-            IsBodyHtml = false
-        };
-
-        mailMessage.To.Add(email);
-
-        await smtpClient.SendMailAsync(mailMessage);
-    }
 
     public async Task Login(string email, string password)
     {
         //Znajdź użytkownika o podanym adresie e-mail
         var customer = await _dbContext.Customers.FirstOrDefaultAsync(c => c.Email == email);
 
-       // Sprawdź, czy użytkownik istnieje i czy hasło jest poprawne
-        if (customer == null || !VerifyPassword(password, customer.PasswordHash))
-        {
-            throw new Exception("Nieprawidłowy adres e-mail lub hasło.");
-        }
+        // Sprawdź, czy użytkownik istnieje i czy hasło jest poprawne
+        //if (customer == null || !VerifyPassword(password, customer.PasswordHash))
+        //{
+        //    throw new Exception("Nieprawidłowy adres e-mail lub hasło.");
+        //}
 
         //Sprawdź, czy konto zostało zweryfikowane
         if (!customer.IsVerified)
@@ -107,37 +84,30 @@ public class Customer
 
 
     }
-   
 
-    public async Task BookTicket(int movieId, DateTime dateTime)
-    {
-        // Sprawdź, czy film o podanym identyfikatorze istnieje i jest dostępny
-        var selectedMovie = await _dbContext.Movies
-            .FirstOrDefaultAsync(m => m.MovieId == movieId && m.IsAvailable);
 
-        if (selectedMovie == null)
-        {
-            throw new Exception("Film o podanym identyfikatorze nie istnieje lub nie jest dostępny.");
-        }
-        
+    //public async Task BookTicket(int movieId, DateTime dateTime)
+    //{
+    //    Sprawdź, czy film o podanym identyfikatorze istnieje i jest dostępny
+    //   var selectedMovie = await _dbContext.Movies
+    //       .FirstOrDefaultAsync(m => m.MovieId == movieId && m.IsAvailable);
 
-      
-        var reservation = new Reservation(_dbContext)
-        {
-            MovieId = selectedMovie.MovieId,
-            //CustomerId = this.Id, TODO: customerId is an object here, it should not be.
-            ReservationDateTime = dateTime
-            
-        };
+    //    if (selectedMovie == null)
+    //    {
+    //        throw new Exception("Film o podanym identyfikatorze nie istnieje lub nie jest dostępny.");
+    //    }
 
-        //_dbContext.Reservations.Add(reservation);
-        await _dbContext.SaveChangesAsync();
-    }
 
-    public CinemaContext Get_dbContext()
-    {
-        return _dbContext;
-    }
+
+    //    var reservation = new DataSchema.Reservation()
+    //    {
+    //        MovieId = selectedMovie.MovieId,
+
+    //    };
+
+    //    _dbContext.Reservations.Add(reservation);
+    //    await _dbContext.SaveChangesAsync();
+    //}
 
     public async Task<List<Movie>> BrowseMovies(List<Movie> availableMovies, CinemaContext _dbContext)
     {
@@ -149,22 +119,21 @@ public class Customer
         return availableMovies;
     }
 
-    //public async Task<List<DataSchema.Reservation>> ViewHistory()
-    //{
-    //    // Pobierz historię rezerwacji bieżącego użytkownika
-        
-    //   var reservations = await _dbContext.Reservations
-    //        .Where(r => r.UserId == Id)
-    //        .Include(r => r.Movie)
-    //        .ToListAsync();
-    //    return reservations;
-  
-    //}
-
-
-    public bool VerifyPassword(string enteredPassword, string storedHash)
+    public async Task<List<DataSchema.Reservation>> ViewHistory()
     {
-        string enteredPasswordHash = HashPassword(enteredPassword);
-        return enteredPasswordHash == storedHash;
+        // Pobierz historię rezerwacji bieżącego użytkownika
+
+        var reservations = await _dbContext.Reservations
+             .Where(r => r.UserId == Id)
+             .Include(r => r.Movie)
+             .ToListAsync();
+        return reservations;
+
     }
+
+    //public bool VerifyPassword(string enteredPassword, string storedHash)
+    //{
+    //    string enteredPasswordHash = HashPassword(enteredPassword);
+    //    return enteredPasswordHash == storedHash;
+    //}
 }

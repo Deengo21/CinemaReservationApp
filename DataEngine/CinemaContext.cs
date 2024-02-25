@@ -27,6 +27,8 @@ namespace DataEngine
         public DbSet<DataSchema.Room> Rooms { get; set; }
         public DbSet<DataSchema.Payment> Payments { get; set; }
 
+       
+
         private readonly IConfiguration _configuration;
 
         public CinemaContext(IConfiguration configuration)
@@ -36,12 +38,6 @@ namespace DataEngine
 
         public CinemaContext(DbContextOptions options) : base(options)
         {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-            builder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=C:\\Users\\Karol\\Desktop\\CinemaReservationApp\\CinemaReservationApp\\DataEngine\\DB.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -88,27 +84,27 @@ namespace DataEngine
             modelBuilder.Entity<DataSchema.Reservation>()
                 .HasOne(r => r.Payment)
                 .WithMany(p => p.Reservations)
-                .HasForeignKey(r => r.PaymentId);
+                .HasForeignKey(r => r.PaymentId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<DataSchema.Reservation>()
                 .HasOne(r => r.Screening)
                 .WithMany(s => s.Reservations)
-                .HasForeignKey(r => r.ScreeningId);
+                .HasForeignKey(r => r.ScreeningId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<DataSchema.Reservation>()
                 .HasOne(r => r.Movie)
                 .WithMany(m => m.Reservations)
-                .HasForeignKey(r => r.MovieId);
+                .HasForeignKey(r => r.MovieId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<DataSchema.Reservation>()
                 .HasOne(r => r.User)
                 .WithMany(u => u.Reservations)
-                .HasForeignKey(r => r.UserId);
+                .HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<DataSchema.Reservation>()
                 .HasOne(r => r.Room)
                 .WithMany(ro => ro.Reservations)
-                .HasForeignKey(r => r.RoomId);
+                .HasForeignKey(r => r.RoomId).OnDelete(DeleteBehavior.NoAction);
 
             //Konfiguracja tabeli Users
             modelBuilder.Entity<DataSchema.Customer>()

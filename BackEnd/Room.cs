@@ -28,7 +28,7 @@ namespace BackEnd
                 Id = room.RoomId;
                 RoomNumber = room.RoomNumber;
                 TotalSeats = room.TotalSeats;
-                //Screenings = room.Screenings;
+                
             }
         }
 
@@ -41,7 +41,7 @@ namespace BackEnd
                 .ToListAsync();
 
             // Oblicz dostępne miejsca
-            int reservedSeatsCount = /*reservations.Sum(r => (int)r.SeatNumber)*/ 0;
+            int reservedSeatsCount = reservations.Sum(r => (int)r.Seat);
             int availableSeats = TotalSeats - reservedSeatsCount;
 
             // Aktualizuj dostępne miejsca w obiekcie Room

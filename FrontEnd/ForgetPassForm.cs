@@ -26,5 +26,10 @@ namespace FrontEnd
         {
 
         }
+
+        private void fMailBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
